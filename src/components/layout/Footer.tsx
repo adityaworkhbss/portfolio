@@ -65,7 +65,7 @@ export default function Footer({ about }: { about?: About | null }) {
 
   return (
     <footer className="relative mt-24 border-t border-white/[0.06]">
-      <div className="mx-auto max-w-7xl px-[20px] lg:px-[56px] pt-20 pb-12">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-20 pt-20 pb-12">
         {/* Editorial top */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
           <div className="md:col-span-6">

@@ -99,7 +99,7 @@ export async function getProject(id: string): Promise<Project | null> {
   }
 }
 
-export async function createProject(data: Omit<Project, "id">): Promise<string> {
+export async function createProject(data: Omit<Project, "id" | "createdAt" | "updatedAt">): Promise<string> {
   const docRef = await addDoc(collection(db, "projects"), {
     ...data,
     createdAt: Timestamp.now(),
@@ -108,7 +108,7 @@ export async function createProject(data: Omit<Project, "id">): Promise<string> 
   return docRef.id;
 }
 
-export async function updateProject(id: string, data: Partial<Project>): Promise<void> {
+export async function updateProject(id: string, data: Partial<Omit<Project, "id" | "createdAt" | "updatedAt">>): Promise<void> {
   const docRef = doc(db, "projects", id);
   await updateDoc(docRef, { ...data, updatedAt: Timestamp.now() });
 }
@@ -177,9 +177,10 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
     const q = query(collection(db, "blogs"), where("slug", "==", slug), limit(1));
     const snapshot = await getDocs(q);
     if (snapshot.empty) return null;
-    const data = doc.data();
+    const blogDoc = snapshot.docs[0];
+    const data = blogDoc.data();
     return { 
-      id: doc.id, 
+      id: blogDoc.id, 
       ...data,
       createdAt: data.createdAt?.toDate?.()?.toISOString() || new Date().toISOString(),
       updatedAt: data.updatedAt?.toDate?.()?.toISOString() || new Date().toISOString(),
@@ -190,7 +191,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   }
 }
 
-export async function createBlog(data: Omit<Blog, "id" | "readingTime">): Promise<string> {
+export async function createBlog(data: Omit<Blog, "id" | "readingTime" | "createdAt" | "updatedAt">): Promise<string> {
   const readingTime = calculateReadingTime(data.content);
   const docRef = await addDoc(collection(db, "blogs"), {
     ...data,
@@ -201,7 +202,7 @@ export async function createBlog(data: Omit<Blog, "id" | "readingTime">): Promis
   return docRef.id;
 }
 
-export async function updateBlog(id: string, data: Partial<Blog>): Promise<void> {
+export async function updateBlog(id: string, data: Partial<Omit<Blog, "id" | "createdAt" | "updatedAt">>): Promise<void> {
   const updateData: Record<string, unknown> = { ...data, updatedAt: Timestamp.now() };
   if (data.content) {
     updateData.readingTime = calculateReadingTime(data.content);

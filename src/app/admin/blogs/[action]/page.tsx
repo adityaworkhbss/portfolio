@@ -94,9 +94,6 @@ export default function BlogActionPage({ params: paramsPromise }: BlogActionPage
         coverImage: formData.coverImage,
         tags,
         published: formData.published,
-        readingTime: calculateReadingTime(formData.content),
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
       };
 
       if (isNew) {

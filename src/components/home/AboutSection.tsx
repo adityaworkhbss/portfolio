@@ -23,7 +23,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
 
   return (
     <section id="about" className="relative py-28 sm:py-36">
-      <div className="mx-auto max-w-7xl px-[20px] lg:px-[56px]">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-20">
         <ScrollReveal>
           <div className="flex items-baseline justify-between mb-14 sm:mb-20">
             <p className="eyebrow">01 — About</p>

@@ -73,16 +73,16 @@ export default function Navbar() {
   if (pathname?.startsWith("/admin")) return null;
 
   return (
-    <div className="">
+    <div>
       <motion.header
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
-        className="fixed z-50"
+        className="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 lg:px-10 pt-4"
       >
         <nav
           className={cn(
-            "flex items-center justify-between gap-3 px-3 sm:px-4 py-2.5 rounded-full border transition-all duration-300",
+            "mx-auto max-w-7xl flex items-center justify-between gap-3 px-4 sm:px-6 py-3 rounded-full border transition-all duration-300",
             scrolled
               ? "bg-[#0c0d0f]/80 backdrop-blur-xl border-white/[0.08] shadow-[0_8px_32px_-8px_rgba(0,0,0,0.6)]"
               : "bg-transparent border-transparent",

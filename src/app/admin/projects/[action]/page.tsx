@@ -92,8 +92,6 @@ export default function ProjectActionPage({ params: paramsPromise }: ProjectActi
         githubUrl: formData.githubUrl,
         order: formData.order,
         featured: formData.featured,
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
       };
 
       if (isNew) {

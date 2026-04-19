@@ -17,7 +17,7 @@ export default async function HomePage() {
   ]);
 
   return (
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col">
           <HeroSection about={about} />
           <AboutSection about={about} />
           <SkillsSection about={about} />

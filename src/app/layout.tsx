@@ -82,9 +82,9 @@ export default async function RootLayout({
     >
       <body className="min-h-screen relative">
         <GlobalBackground />
-        <div className=" relative gap-48">
+        <div className="relative">
           <Navbar />
-          <main className="relative z-10 w-full gap-24">
+          <main className="relative z-10 w-full">
             {children}
           </main>
           <Footer about={about} />

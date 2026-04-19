@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, FileText, Coffee, CheckCircle2, XCircle } from "lucide-react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import ResumeModal from "@/components/ui/ResumeModal";
 import {
   GithubIcon as Github,
   LinkedinIcon as Linkedin,
@@ -143,6 +144,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
   const [currentLine, setCurrentLine] = useState(0);
   const [currentChar, setCurrentChar] = useState(0);
   const [buildStatus, setBuildStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   useEffect(() => {
     const currentSnippet = codeSnippets[snippetIndex];
@@ -184,8 +186,9 @@ export default function HeroSection({ about }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative pt-24 sm:pt-32 pb-24 sm:pb-32 overflow-hidden">
-      <div className="relative z-10 mx-auto max-w-7xl px-[20px] lg:px-[56px]">
+    <>
+    <section className="relative pt-32 sm:pt-40 pb-24 sm:pb-32 overflow-hidden">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-20">
         {/* Top meta row */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -394,19 +397,13 @@ export default function HeroSection({ about }: HeroSectionProps) {
               </Button>
               {about?.resumeUrl && (
                 <Button 
-                  asChild
                   variant="muted"
                   size="lg" 
-                  className="w-[1/2] px-4"
+                  className="w-[1/2] px-4 cursor-pointer"
+                  onClick={() => setResumeModalOpen(true)}
                 >
-                  <a
-                    href={about.resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FileText size={18} />
-                    Resume
-                  </a>
+                  <FileText size={18} />
+                  Resume
                 </Button>
               )}
             </div>
@@ -462,5 +459,14 @@ export default function HeroSection({ about }: HeroSectionProps) {
         </div>
       </motion.div>
     </section>
+
+    {about?.resumeUrl && (
+      <ResumeModal
+        resumeUrl={about.resumeUrl}
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
+      />
+    )}
+    </>
   );
 }

@@ -27,7 +27,7 @@ export async function generateMetadata({
       title: blog.title,
       description: blog.excerpt,
       type: "article",
-      publishedTime: blog.createdAt?.toDate?.()?.toISOString(),
+      publishedTime: blog.createdAt,
       tags: blog.tags,
       images: blog.coverImage ? [{ url: blog.coverImage }] : [],
     },

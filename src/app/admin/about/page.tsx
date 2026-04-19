@@ -6,6 +6,7 @@ import { getAbout, updateAbout } from "@/lib/firebase/firestore";
 import Button from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import ImageUploader from "@/components/admin/ImageUploader";
+import FileUploader from "@/components/admin/FileUploader";
 import type { About } from "@/lib/types";
 import toast from "react-hot-toast";
 
@@ -188,12 +189,21 @@ export default function AdminAboutPage() {
           <Input id="about-availability-text" label="Availability Banner Text" value={formData.availabilityText} onChange={(e) => setFormData({ ...formData, availabilityText: e.target.value })} />
         </div>
 
-        <Input 
-          id="about-resume" 
-          label="Resume Link (e.g. drive or cloudinary link)" 
-          value={formData.resumeUrl} 
-          onChange={(e) => setFormData({ ...formData, resumeUrl: e.target.value })} 
-        />
+        <div className="space-y-1.5">
+          <label className="block text-sm font-medium text-zinc-300">Resume (PDF)</label>
+          <FileUploader
+            value={formData.resumeUrl}
+            onUpload={(url) => setFormData({ ...formData, resumeUrl: url })}
+            folder="resume"
+            accept=".pdf"
+            label="PDF file only"
+          />
+          {formData.resumeUrl && (
+            <p className="mono text-[11px] text-zinc-500 truncate mt-1">  
+              {formData.resumeUrl}
+            </p>
+          )}
+        </div>
 
         <Textarea
           id="about-skills"

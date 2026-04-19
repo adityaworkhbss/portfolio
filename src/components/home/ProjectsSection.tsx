@@ -35,7 +35,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       id="projects"
       className="relative py-28 sm:py-36 border-t border-white/[0.05]"
     >
-      <div className="mx-auto max-w-7xl px-[20px] lg:px-[56px]">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-20">
         <ScrollReveal>
           <div className="flex items-baseline justify-between mb-14 sm:mb-20">
             <p className="eyebrow">03 — Selected Work</p>
