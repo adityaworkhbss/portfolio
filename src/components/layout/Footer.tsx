@@ -112,7 +112,7 @@ export default function Footer({ about }: { about?: About | null }) {
         <div className="mt-8 flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex flex-col gap-1">
             <p className="text-[13px] text-zinc-500">
-              © {year} Aditya Sharma. All rights reserved.
+              © {year} Aditya Gupta. All rights reserved.
             </p>
             <p className="mono text-[11px] text-zinc-600 tracking-wide">
               Designed & built with love 💛 · Crafted in India

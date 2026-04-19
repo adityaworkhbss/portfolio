@@ -35,13 +35,13 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://adityasharma.dev"),
   title: {
-    default: "Aditya Sharma — Mobile App Developer",
-    template: "%s · Aditya Sharma",
+    default: "Aditya Gupta — Mobile App Developer",
+    template: "%s · Aditya Gupta",
   },
   description:
     "Independent software developer crafting fast, beautiful mobile and web experiences with React Native, Flutter and modern web tooling.",
   keywords: [
-    "Aditya Sharma",
+    "Aditya Gupta",
     "mobile developer",
     "React Native",
     "Flutter",
@@ -51,19 +51,19 @@ export const metadata: Metadata = {
     "full-stack",
     "portfolio",
   ],
-  authors: [{ name: "Aditya Sharma" }],
-  creator: "Aditya Sharma",
+  authors: [{ name: "Aditya Gupta" }],
+  creator: "Aditya Gupta",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Aditya Sharma",
-    title: "Aditya Sharma — Mobile App Developer",
+    siteName: "Aditya Gupta",
+    title: "Aditya Gupta — Mobile App Developer",
     description:
       "Independent software developer crafting fast, beautiful mobile and web experiences.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Sharma — Mobile App Developer",
+    title: "Aditya Gupta — Mobile App Developer",
     description:
       "Independent software developer crafting fast, beautiful mobile and web experiences.",
   },
