@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 import {
   GithubIcon as Github,
   LinkedinIcon as Linkedin,
@@ -94,9 +94,10 @@ export default function Footer({ about }: { about?: About | null }) {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-[14.5px] text-zinc-400 hover:text-white transition-colors"
+                        className="group flex items-center gap-1.5 w-fit text-[14.5px] text-zinc-400 hover:text-white transition-colors"
                       >
                         {link.label}
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 text-[var(--accent)]" />
                       </Link>
                     </li>
                   ))}
