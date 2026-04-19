@@ -115,7 +115,7 @@ export default function Footer({ about }: { about?: About | null }) {
               © {year} Aditya Sharma. All rights reserved.
             </p>
             <p className="mono text-[11px] text-zinc-600 tracking-wide">
-              Designed & built with Next.js · Crafted in India
+              Designed & built with love 💛 · Crafted in India
             </p>
           </div>
 
