@@ -7,6 +7,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import ShareButtons from "@/components/blog/ShareButtons";
+import Mermaid from "@/components/blog/Mermaid";
 import { incrementBlogViews } from "@/lib/firebase/firestore";
 import type { Blog } from "@/lib/types";
 
@@ -32,7 +33,24 @@ export default function BlogDetailClient({ blog }: BlogDetailClientProps) {
         <div className="prose-blog">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeHighlight, rehypeRaw]}
+            rehypePlugins={[[rehypeHighlight, { ignoreMissing: true }], rehypeRaw]}
+            components={{
+              code(props: any) {
+                const { children, className, node, ...rest } = props;
+                const match = /language-(\w+)/.exec(className || "");
+                const language = match ? match[1] : null;
+
+                if (language === "mermaid") {
+                  return <Mermaid chart={String(children).replace(/\n$/, "")} />;
+                }
+
+                return (
+                  <code className={className} {...rest}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
           >
             {blog.content}
           </ReactMarkdown>

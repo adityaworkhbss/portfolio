@@ -14,7 +14,7 @@ const socialLinks = [
   { Icon: Github, href: "https://github.com", label: "GitHub" },
   { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
   { Icon: Twitter, href: "https://twitter.com", label: "Twitter / X" },
-  { Icon: Mail, href: "mailto:hello@adityasharma.dev", label: "Email" },
+  { Icon: Mail, href: "mailto:adityaworkhbss@gmail.com", label: "Email" },
 ];
 
 const navColumns = [

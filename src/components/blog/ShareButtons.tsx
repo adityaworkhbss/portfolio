@@ -2,7 +2,7 @@
 
 import { Link as LinkIcon, Check } from "lucide-react";
 import { TwitterIcon as Twitter, LinkedinIcon as Linkedin } from "@/components/ui/Icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ShareButtonsProps {
   title: string;
@@ -11,22 +11,27 @@ interface ShareButtonsProps {
 
 export default function ShareButtons({ title, slug }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
-  const url = typeof window !== "undefined" ? `${window.location.origin}/blog/${slug}` : "";
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    setUrl(`${window.location.origin}/blog/${slug}`);
+  }, [slug]);
 
   const shareLinks = [
     {
       icon: Twitter,
       label: "Twitter",
-      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+      href: url ? `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}` : "#",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      href: url ? `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` : "#",
     },
   ];
 
   const copyLink = async () => {
+    if (!url) return;
     await navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -39,7 +44,7 @@ export default function ShareButtons({ title, slug }: ShareButtonsProps) {
         <a
           key={link.label}
           href={link.href}
-          target="_blank"
+          target={url ? "_blank" : "_self"}
           rel="noopener noreferrer"
           aria-label={`Share on ${link.label}`}
           className="p-2 text-zinc-500 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200"
