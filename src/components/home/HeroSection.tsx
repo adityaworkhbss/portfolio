@@ -249,12 +249,12 @@ export default function HeroSection({ about }: HeroSectionProps) {
           </h1>
 
           {/* Coffee & Code Floating Animation */}
-          <div className="hidden lg:flex col-span-5 xl:col-span-4 justify-end relative h-full items-center mr-[-20px] xl:mr-0 xl:pr-4">
+          <div className="col-span-12 lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end relative h-full items-center mt-8 lg:mt-0 lg:mr-[-20px] xl:mr-0 xl:pr-4">
             <motion.div
               initial={{ opacity: 0, rotate: 2, scale: 0.95 }}
               animate={{ opacity: 1, rotate: -3, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-[340px] h-80 rounded-2xl bg-[#0c0c0e]/80 backdrop-blur-2xl border border-white/10 shadow-[var(--shadow-lg),inset_0_1px_0_rgba(255,255,255,0.05)] flex flex-col group/terminal"
+              className="relative w-[90%] max-w-[340px] h-64 sm:h-80 rounded-2xl bg-[#0c0c0e]/80 backdrop-blur-2xl border border-white/10 shadow-[var(--shadow-lg),inset_0_1px_0_rgba(255,255,255,0.05)] flex flex-col group/terminal mx-auto lg:mx-0"
             >
               {/* Terminal Header */}
               <div className="h-9 border-b border-white/[0.08] flex items-center px-4 gap-1.5 bg-black/40">
@@ -265,7 +265,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
               </div>
 
               {/* Typewriter Code Lines */}
-              <div className="p-5 flex-1 font-mono text-[12px] flex flex-col gap-1.5 overflow-hidden relative">
+              <div className="p-4 sm:p-5 flex-1 font-mono text-[11px] sm:text-[12px] flex flex-col gap-1.5 overflow-hidden relative">
                 <AnimatePresence>
                   {buildStatus !== 'idle' && (
                     <motion.div
@@ -294,7 +294,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
 
                 {displayText.map((line, i) => (
                   <div key={`${snippetIndex}-${i}`} className="flex">
-                    <span className="text-zinc-600 mr-3 select-none w-4">{i + 1}</span>
+                    <span className="text-zinc-600 mr-2 sm:mr-3 select-none w-3 sm:w-4">{i + 1}</span>
                     <pre className="text-zinc-300 whitespace-pre">
                       {line.split(' ').map((word, wi) => {
                         if (['const', 'while', 'function', 'return'].includes(word.replace(/[(){}]/g, ''))) return <span key={wi} className="text-pink-400">{word} </span>;
@@ -328,10 +328,10 @@ export default function HeroSection({ about }: HeroSectionProps) {
                 onClick={handleCoffeeClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="absolute -right-8 -bottom-8 w-24 h-24 bg-[#161618] border border-white/[0.08] rounded-2xl flex items-center justify-center shadow-2xl rotate-12 backdrop-blur-md cursor-pointer hover:border-[var(--accent)]/30 transition-colors z-30"
+                className="absolute -right-2 sm:-right-8 -bottom-4 sm:-bottom-8 w-20 h-20 sm:w-24 sm:h-24 bg-[#161618] border border-white/[0.08] rounded-2xl flex items-center justify-center shadow-2xl rotate-12 backdrop-blur-md cursor-pointer hover:border-[var(--accent)]/30 transition-colors z-30"
               >
                 <div className="relative">
-                  <Coffee className="text-[var(--accent)]" size={32} />
+                  <Coffee className="text-[var(--accent)] w-7 h-7 sm:w-8 sm:h-8" />
                   {/* Steam Particles */}
                   <motion.div
                     animate={{ y: [0, -20], opacity: [0, 1, 0] }}
@@ -344,7 +344,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
                     className="absolute -top-6 left-1/3 -translate-x-1/2 w-1.5 h-6 bg-white/20 blur-[2.5px] rounded-full"
                   />
                 </div>
-                <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-[var(--accent)] text-zinc-950 text-[9px] font-bold tracking-tighter opacity-0 group-hover/terminal:opacity-100 transition-opacity">
+                <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-[var(--accent)] text-zinc-950 text-[8px] sm:text-[9px] font-bold tracking-tighter opacity-0 group-hover/terminal:opacity-100 transition-opacity">
                   CLICK ME
                 </div>
               </motion.button>
