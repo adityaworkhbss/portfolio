@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { Mail, Briefcase, User, History, Send, BookOpen, FileText } from "lucide-react";
 import {
   GithubIcon as Github,
   LinkedinIcon as Linkedin,
@@ -21,17 +21,17 @@ const navColumns = [
   {
     title: "Index",
     links: [
-      { label: "Work", href: "/#projects" },
-      { label: "About", href: "/#about" },
-      { label: "Experience", href: "/#experience" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Work", href: "/#projects", icon: Briefcase },
+      { label: "About", href: "/#about", icon: User },
+      { label: "Experience", href: "/#experience", icon: History },
+      { label: "Contact", href: "/#contact", icon: Send },
     ],
   },
   {
     title: "Pages",
     links: [
-      { label: "Journal", href: "/blog" },
-      { label: "Resume", href: "/#resume" },
+      { label: "Journal", href: "/blog", icon: BookOpen },
+      { label: "Resume", href: "/#resume", icon: FileText },
     ],
   },
 ];
@@ -90,17 +90,20 @@ export default function Footer({ about }: { about?: About | null }) {
               <div key={col.title}>
                 <p className="eyebrow mb-5">{col.title}</p>
                 <ul className="space-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="group flex items-center gap-1.5 w-fit text-[14.5px] text-zinc-400 hover:text-white transition-colors"
-                      >
-                        {link.label}
-                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 text-[var(--accent)]" />
-                      </Link>
-                    </li>
-                  ))}
+                  {col.links.map((link) => {
+                    const LinkIcon = link.icon;
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="group flex items-center gap-2 w-fit text-[14.5px] text-zinc-400 hover:text-white transition-colors"
+                        >
+                          <LinkIcon className="w-3.5 h-3.5 text-zinc-500 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-[var(--accent)]" />
+                          {link.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
