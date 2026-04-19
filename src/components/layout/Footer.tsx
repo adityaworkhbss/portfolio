@@ -118,12 +118,16 @@ export default function Footer({ about }: { about?: About | null }) {
             <p className="text-[13px] text-zinc-500">
               © {year} Aditya Gupta. All rights reserved.
             </p>
-            <p className="mono text-[11px] text-zinc-600 tracking-wide">
-              Designed & built with love 💛 · Crafted in India
+            <p className="mono text-[11px] text-zinc-600 tracking-wide flex items-center gap-1.5">
+              Designed & built with love{" "}
+              <span className="inline-block animate-heartbeat text-[13px] filter drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]">
+                💛
+              </span>{" "}
+              · Crafted in India
             </p>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {dynamicSocials.map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -131,9 +135,10 @@ export default function Footer({ about }: { about?: About | null }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-colors"
+                className="group relative inline-flex items-center justify-center w-9 h-9 rounded-full text-zinc-400 hover:text-[var(--accent)] hover:bg-[var(--accent-glow)] transition-all duration-300 hover:-translate-y-1 hover:scale-110"
               >
-                <Icon size={16} />
+                <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse-soft shadow-[0_0_15px_var(--accent-glow)] transition-opacity duration-300" />
+                <Icon size={16} className="relative z-10 transition-transform duration-300 group-hover:rotate-[8deg]" />
               </a>
             ))}
           </div>

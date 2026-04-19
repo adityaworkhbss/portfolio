@@ -231,6 +231,15 @@
 }
 .animate-fade-in-up { animation: fade-in-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.25); }
+  70% { transform: scale(1); }
+}
+.animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
