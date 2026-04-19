@@ -52,13 +52,7 @@ export default function AboutSection({ about }: AboutSectionProps) {
                     </span>
                   </div>
                 )}
-                {/* corner annotations */}
-                <div className="absolute top-3 left-3 mono text-[10.5px] text-white/70 bg-black/40 backdrop-blur px-2 py-1 rounded">
-                  IMG_0001 · {name ? name.split(" ")[0]?.toUpperCase() : ""}
-                </div>
-                <div className="absolute bottom-3 right-3 mono text-[10.5px] text-white/70 bg-black/40 backdrop-blur px-2 py-1 rounded">
-                  ⌘ — {new Date().getFullYear()}
-                </div>
+
               </div>
             </div>
           </ScrollReveal>
