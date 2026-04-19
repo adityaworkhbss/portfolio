@@ -337,7 +337,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
                   <div key={`${snippetIndex}-${i}`} className="flex">
                     <span className="text-zinc-600 mr-2 sm:mr-3 select-none w-3 sm:w-4">{i + 1}</span>
                     <pre className="text-zinc-300 whitespace-pre">
-                      {line.split(' ').map((word, wi) => {
+                      {(line || '').split(' ').map((word, wi) => {
                         if (['const', 'while', 'function', 'return'].includes(word.replace(/[(){}]/g, ''))) return <span key={wi} className="text-pink-400">{word} </span>;
                         if (word.startsWith('"') || word.startsWith("'")) return <span key={wi} className="text-emerald-300">{word} </span>;
                         if (word.includes('(')) {
