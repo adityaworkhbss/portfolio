@@ -145,6 +145,7 @@ export default function HeroSection({ about }: HeroSectionProps) {
   const [currentChar, setCurrentChar] = useState(0);
   const [buildStatus, setBuildStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [terminalState, setTerminalState] = useState<'normal' | 'minimized' | 'maximized' | 'closed'>('normal');
 
   useEffect(() => {
     const currentSnippet = codeSnippets[snippetIndex];
@@ -249,19 +250,59 @@ export default function HeroSection({ about }: HeroSectionProps) {
           </h1>
 
           {/* Coffee & Code Floating Animation */}
-          <div className="col-span-12 lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end relative h-full items-center mt-8 lg:mt-0 lg:mr-[-20px] xl:mr-0 xl:pr-4">
+          <div className="col-span-12 lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end relative h-[320px] lg:h-full items-center mt-8 lg:mt-0 lg:mr-[-20px] xl:mr-0 xl:pr-4">
+            <AnimatePresence>
+              {(terminalState === 'closed' || terminalState === 'minimized') && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                  onClick={() => setTerminalState('normal')}
+                  className="absolute z-40 flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#161618] border border-white/10 text-zinc-300 hover:text-white shadow-2xl backdrop-blur-md transition-colors"
+                >
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f] animate-pulse" />
+                  <span className="text-[13px] font-mono tracking-tight">Reopen Terminal</span>
+                </motion.button>
+              )}
+            </AnimatePresence>
+
             <motion.div
               initial={{ opacity: 0, rotate: 2, scale: 0.95 }}
-              animate={{ opacity: 1, rotate: -3, scale: 1 }}
-              transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-[90%] max-w-[340px] h-64 sm:h-80 rounded-2xl bg-[#0c0c0e]/80 backdrop-blur-2xl border border-white/10 shadow-[var(--shadow-lg),inset_0_1px_0_rgba(255,255,255,0.05)] flex flex-col group/terminal mx-auto lg:mx-0"
+              animate={
+                terminalState === 'closed' ? { opacity: 0, scale: 0.8, y: 40, filter: 'blur(10px)', pointerEvents: 'none' } :
+                terminalState === 'minimized' ? { opacity: 0, scale: 0.2, y: 200, pointerEvents: 'none' } :
+                terminalState === 'maximized' ? { opacity: 1, scale: 1.15, rotate: 0, zIndex: 50, pointerEvents: 'auto' } :
+                { opacity: 1, rotate: -3, scale: 1, pointerEvents: 'auto' }
+              }
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-[90%] max-w-[340px] h-64 sm:h-80 rounded-2xl bg-[#0c0c0e]/80 backdrop-blur-2xl border border-white/10 shadow-[var(--shadow-lg),inset_0_1px_0_rgba(255,255,255,0.05)] flex flex-col group/terminal mx-auto lg:mx-0 origin-center"
             >
               {/* Terminal Header */}
-              <div className="h-9 border-b border-white/[0.08] flex items-center px-4 gap-1.5 bg-black/40">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 mt-0.5 mono text-[10px] text-zinc-500">zsh</span>
+              <div className="h-9 border-b border-white/[0.08] flex items-center px-4 gap-1.5 bg-black/40 rounded-t-2xl">
+                <div className="group flex items-center gap-1.5">
+                  <button 
+                    onClick={() => setTerminalState('closed')} 
+                    className="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56] flex items-center justify-center transition-colors overflow-hidden border border-black/10"
+                    aria-label="Close"
+                  >
+                    <span className="opacity-0 group-hover:opacity-100 text-[7px] text-black/70 font-black leading-none mt-[0.5px]">✕</span>
+                  </button>
+                  <button 
+                    onClick={() => setTerminalState('minimized')} 
+                    className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e] flex items-center justify-center transition-colors overflow-hidden border border-black/10"
+                    aria-label="Minimize"
+                  >
+                    <span className="opacity-0 group-hover:opacity-100 text-[9px] text-black/70 font-black leading-none -mt-[1px]">−</span>
+                  </button>
+                  <button 
+                    onClick={() => setTerminalState(prev => prev === 'maximized' ? 'normal' : 'maximized')} 
+                    className="w-3 h-3 rounded-full bg-[#27c93f] hover:bg-[#27c93f] flex items-center justify-center transition-colors overflow-hidden border border-black/10"
+                    aria-label="Maximize"
+                  >
+                    <span className="opacity-0 group-hover:opacity-100 text-[8px] text-black/70 font-black leading-none mt-[0.5px]">＋</span>
+                  </button>
+                </div>
+                <span className="ml-2 mt-0.5 mono text-[10px] text-zinc-500 pointer-events-none">zsh</span>
               </div>
 
               {/* Typewriter Code Lines */}
@@ -419,9 +460,10 @@ export default function HeroSection({ about }: HeroSectionProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.platform}
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-full text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-colors"
+                      className="group relative inline-flex items-center justify-center w-10 h-10 rounded-full text-zinc-400 hover:text-[var(--accent)] hover:bg-[var(--accent-glow)] transition-all duration-300 hover:-translate-y-1 hover:scale-110"
                     >
-                      <Icon size={16} />
+                      <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse-soft shadow-[0_0_15px_var(--accent-glow)] transition-opacity duration-300" />
+                      <Icon size={16} className="relative z-10 transition-transform duration-300 group-hover:rotate-[8deg]" />
                     </a>
                   );
                 })}
