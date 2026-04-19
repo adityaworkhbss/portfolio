@@ -73,6 +73,7 @@ export interface Blog {
   updatedAt: string;
   published: boolean;
   readingTime: number;
+  views?: number;
 }
 
 export interface ContactMessage {

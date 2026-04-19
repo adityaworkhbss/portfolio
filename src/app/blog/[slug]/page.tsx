@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Eye } from "lucide-react";
 import { getBlogBySlug, getBlogs } from "@/lib/firebase/firestore";
 import { formatDate } from "@/lib/utils";
 import BlogDetailClient from "./BlogDetailClient";
@@ -92,6 +92,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             <span className="inline-flex items-center gap-2">
               <Clock size={12} />
               {blog.readingTime} min read
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <Eye size={12} />
+              {blog.views || 0} views
             </span>
           </div>
 

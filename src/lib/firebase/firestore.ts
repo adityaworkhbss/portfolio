@@ -12,6 +12,7 @@ import {
   limit,
   Timestamp,
   setDoc,
+  increment,
 } from "firebase/firestore";
 import { db } from "./config";
 import type { About, Project, Experience, Blog, ContactMessage } from "../types";
@@ -212,6 +213,17 @@ export async function updateBlog(id: string, data: Partial<Omit<Blog, "id" | "cr
 
 export async function deleteBlog(id: string): Promise<void> {
   await deleteDoc(doc(db, "blogs", id));
+}
+
+export async function incrementBlogViews(id: string): Promise<void> {
+  try {
+    const docRef = doc(db, "blogs", id);
+    await updateDoc(docRef, {
+      views: increment(1)
+    });
+  } catch (error) {
+    console.error("Error incrementing blog views:", error);
+  }
 }
 
 // ─── Contact Messages ──────────────────────────────────

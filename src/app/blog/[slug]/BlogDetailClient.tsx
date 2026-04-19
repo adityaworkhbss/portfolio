@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import ShareButtons from "@/components/blog/ShareButtons";
+import { incrementBlogViews } from "@/lib/firebase/firestore";
 import type { Blog } from "@/lib/types";
 
 interface BlogDetailClientProps {
@@ -13,6 +15,15 @@ interface BlogDetailClientProps {
 }
 
 export default function BlogDetailClient({ blog }: BlogDetailClientProps) {
+  const hasIncremented = useRef(false);
+
+  useEffect(() => {
+    if (!hasIncremented.current) {
+      incrementBlogViews(blog.id);
+      hasIncremented.current = true;
+    }
+  }, [blog.id]);
+
   return (
     <>
       <ReadingProgress />

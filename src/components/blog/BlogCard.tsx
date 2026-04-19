@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Clock } from "lucide-react";
+import { Clock, Eye } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import type { Blog } from "@/lib/types";
 
@@ -47,6 +47,11 @@ export default function BlogCard({ blog, index = 0 }: BlogCardProps) {
             <span className="inline-flex items-center gap-1.5">
               <Clock size={11} />
               {blog.readingTime} min
+            </span>
+            <span className="text-zinc-700">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Eye size={11} />
+              {blog.views || 0}
             </span>
           </div>
 
