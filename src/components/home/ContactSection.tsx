@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Input, Textarea } from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
-import { submitContactMessage } from "@/lib/firebase/firestore";
 import toast from "react-hot-toast";
 import type { About } from "@/lib/types";
 
@@ -25,7 +24,12 @@ export default function ContactSection({ about }: { about?: About | null }) {
     }
     setLoading(true);
     try {
-      await submitContactMessage(formData);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) throw new Error("Request failed");
       toast.success("Message sent — talk soon.");
       setFormData({ name: "", email: "", message: "" });
     } catch {

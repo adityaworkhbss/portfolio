@@ -33,7 +33,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adityasharma.dev"),
+  metadataBase: new URL("https://adityaguptamobdev.vercel.app/"),
   title: {
     default: "Aditya Gupta — Mobile App Developer",
     template: "%s · Aditya Gupta",

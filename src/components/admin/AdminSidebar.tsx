@@ -34,7 +34,7 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-[20%] bg-zinc-950 border-r border-white/5 p-4 hidden md:flex flex-col z-30">
+    <aside className="w-[260px] min-h-screen bg-zinc-950 border-r border-white/5 p-4 hidden md:flex flex-col">
       <nav className="flex-1 space-y-1">
         {navItems.map((item) => (
           <Link
